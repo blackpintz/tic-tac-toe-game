@@ -13,7 +13,7 @@ puts "Player one is #{player_one} and player two is #{player_two}"
 game_on = true
 winner = false
 
-while game_on && !winner
+while game_on && winner
 
   puts ' | | '
   puts ' | | '
