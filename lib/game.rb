@@ -24,7 +24,7 @@ class TicTacToe
       else
         verify_move
       end
-    elsif @@player_status == 0
+    elsif @@player_status.zero?
       puts " #{@name_two} Please Enter your Number between 1 and 9 "
       @@one_move = gets.chomp
       if @@one_move.to_i < 1 || @@one_move.to_i > 9
@@ -32,7 +32,7 @@ class TicTacToe
         input
       else
         verify_move
-     end
+      end
     end
   end
 
@@ -43,14 +43,12 @@ class TicTacToe
 
     elsif !@@score_res.include?(@@one_move) && @@player_status == 1
       @@board_numbers.map! { |val| val == @@one_move.to_i ? 'x' : val }
-      @@board_numbers
       @@player_status = 0
       @@score_res << @@one_move.to_i
       print "Selected numbers are #{@@score_res}"
       create_table
-    elsif !@@score_res.include?(@@one_move) && @@player_status == 0
+    elsif !@@score_res.include?(@@one_move) && @@player_status.zero?
       @@board_numbers.map! { |val| val == @@one_move.to_i ? '0' : val }
-      @@board_numbers
       @@player_status = 1
       @@score_res << @@one_move.to_i
       print "Selected numbers are #{@@score_res}"
@@ -70,7 +68,7 @@ class TicTacToe
     winner
   end
 
-  def winner # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity, Metrics/AbcSize
+  def winner # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
     if @@board_numbers[0] == @@board_numbers[1] && @@board_numbers[0] == @@board_numbers[2]
       puts " #{@name} Has won the game" if @@player_status.zero?
       puts " #{@name_two} Has won the game" if @@player_status == 1
@@ -108,7 +106,7 @@ class TicTacToe
       restart
     else
       input
-      end
+    end
   end
 
   def restart
@@ -126,5 +124,5 @@ class TicTacToe
     else
       puts 'Alright Guys. Get out of here. Bunch of Cowards!!!'
     end
-end
+  end
 end
