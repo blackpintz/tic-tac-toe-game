@@ -23,17 +23,36 @@ require_relative '../lib/game.rb'
 #     answer
 # end
 
-puts "Palyer ones name"
+puts 'Palyer ones name'
 $player_one = gets.chomp
 
-puts "player one is #{$player_one}"
+puts 'Palyer ones name'
+$player_two = gets.chomp
+
+puts "player one is #{$player_one} and player two is #{$player_two}"
 
 def player_oner
-    puts "#{$player_one}, what is your number?"
-    answer = gets.chomp
-    answer.to_i
+  puts "#{$player_one}, what is your number?"
+  answer = gets.chomp
+  answer.to_i
 end
 
+def player_two
+    puts "#{$player_two}, what is your number?"
+    answer = gets.chomp
+    answer.to_i
+  end
+
+#  i = $playing_numbers.length
+#  j = 0
+
+#   while j < i 
+#     game = GameLogic.new
+#     game.value_arr(:player_oner)
+#     j +=1
+#   end
+
+    
 
 
 # def congratulations
@@ -42,7 +61,7 @@ end
 
 logic = GameLogic.new
 puts logic.value_arr(:player_oner)
-puts logic.game($answer)
+puts logic.game($answer, :player_two)
 
 # new_msg = Notification.new
 # puts new_msg.messenger(:out_of_range)
