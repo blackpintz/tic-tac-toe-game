@@ -31,6 +31,7 @@ puts "player one is #{$player_one}"
 def player_oner
     puts "#{$player_one}, what is your number?"
     answer = gets.chomp
+    answer.to_i
 end
 
 
@@ -41,7 +42,7 @@ end
 
 logic = GameLogic.new
 puts logic.value_arr(:player_oner)
-
+puts logic.game($answer)
 
 # new_msg = Notification.new
 # puts new_msg.messenger(:out_of_range)
