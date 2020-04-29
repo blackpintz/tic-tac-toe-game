@@ -11,7 +11,7 @@ class Player_one
   end
   
   def notification
-    "#{@name}, what is your number"
+    "#{@name}, what is your number?"
   end
   
   def value_arr
@@ -44,3 +44,11 @@ class Board
   end
 
 end
+
+class Notification
+def messenger(msg)
+  method(msg).call
+end
+end
+
+
