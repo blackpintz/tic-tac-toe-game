@@ -16,17 +16,33 @@ require_relative '../lib/game.rb'
 
 # alican.input
 
-def out_of_range
-    puts "Your number is out of range"
-    puts "Please enter another number?"
+# def out_of_range
+#     puts "Your number is out of range"
+#     puts "Please enter another number?"
+#     answer = gets.chomp
+#     answer
+# end
+
+puts "Palyer ones name"
+$player_one = gets.chomp
+
+puts "player one is #{$player_one}"
+
+def player_oner
+    puts "#{$player_one}, what is your number?"
     answer = gets.chomp
-    answer
 end
 
-def congratulations
-    "Congratulations, you win!"
-end
 
-new_msg = Notification.new
-puts new_msg.messenger(:out_of_range)
-puts new_msg.messenger(:congratulations)
+
+# def congratulations
+#     "Congratulations, you win!"
+# end
+
+logic = GameLogic.new
+puts logic.value_arr(:player_oner)
+
+
+# new_msg = Notification.new
+# puts new_msg.messenger(:out_of_range)
+# puts new_msg.messenger(:congratulations)
