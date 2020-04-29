@@ -8,16 +8,22 @@ $answer = nil
 
 class Player_one
   attr_accessor :name
-  def initialize(name)
-    @name = name
+  def initialize(num_played)
+    @num_played = num_played
+    $player_status = 0
+  end
+  
+  def push_arr
+    $num_arr.push(@num_played)
   end
 
-  def notification
-    "#{@name}, what is your number?"
-  end
 end
 
 class Player_two < Player_one
+  def initialize(num_played)
+    super
+    $player_status = 1
+  end
 end
 
 class Board
@@ -52,15 +58,19 @@ class GameLogic
     print $num_arr
   end
 
-  def game(val,sample)
+  def game(val)
     if $playing_numbers.include?(val) && !$num_arr.include?(val)
+      if $player_status == 1
         $playing_numbers.map! do |value|
           value == val ? value = 'X' : value
         end
+      else
+        $playing_numbers.map! do |value|
+        value == val ? value = 0 : value
+      end
+      end
       board_number = $playing_numbers.each_slice(3).to_a
       my_board = Board.new(board_number[0], board_number[1], board_number[2])
-      
-      $num_arr.push($answer)
       puts my_board.draw_board
       print $num_arr
     else
