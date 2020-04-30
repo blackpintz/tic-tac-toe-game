@@ -47,12 +47,11 @@ def game_func(arr)
     logic = GameLogic.new
     puts logic.game(answer)
     i += 1
-    break if i == 10
+    break if i == 10 || $winner == true
   end
   puts arr.length
-  if arr.length == 9
+  if arr.length == 9 || $winner == true
     def repeat
-      puts 'Looks like its a dray game'
       puts 'Do you wanna play again,. Press y if yes and n if no'
       ans = gets.chomp
       if ans == 'y' || ans == 'yes'
@@ -60,6 +59,7 @@ def game_func(arr)
         $playing_numbers = (1..9).to_a
         $player_status = 1
         $board_number = []
+        $winner = false
         game_func(arr)
       elsif ans == 'n' || ans == 'no'
         puts 'Alright Guys. Get out of here'
@@ -68,6 +68,14 @@ def game_func(arr)
         puts 'Please Enter y or n'
         repeat
       end
+    end
+    if $winner
+      puts "#{$player_one}, you've won the game" if $player_status == 0
+      puts "#{$player_two}, you've won the game" if $player_status == 1
+      repeat
+    else
+      puts 'Looks like its a draw game'
+      repeat
     end
     repeat
   end

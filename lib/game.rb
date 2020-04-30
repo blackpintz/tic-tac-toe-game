@@ -3,8 +3,7 @@ require 'terminal-table/import'
 $num_arr = []
 $playing_numbers = (1..9).to_a
 $player_status = 1
-
-$answer = nil
+$winner = false
 
 class Player_one
   attr_reader :num_played
@@ -45,6 +44,34 @@ class Board
   end
 end
 
+class Check_winner < Board
+  def vertical_check
+    check = nil
+    i = 0
+    while i < @arry_one.length
+      check = @arry_one[i] == @arry_two[i] && @arry_one[i] == @arry_three[i]
+      i += 1
+      break if check == true
+    end
+    check == true ? $winner = true : nil
+  end
+
+  def diagonal_check
+    i = 0
+    while i < @arry_one.length
+      check = (@arry_one[i] == @arry_two[i + 1] && @arry_one[i] == @arry_three[i + 2]) || (@arry_three[i] == @arry_two[i + 1] && @arry_three[i] == @arry_one[i + 2])
+      i += 1
+      break if check == true
+    end
+    check == true ? $winner = true : nil
+  end
+
+  def linear_check
+    check = (@arry_one.all?(0) || @arry_one.all?('X')) || (@arry_two.all?(0) || @arry_two.all?('X')) || (@arry_three.all?(0) || @arry_three.all?('X'))
+    check == true ? $winner = true : nil
+  end
+end
+
 class GameLogic
   def game(res)
     val = res.to_i
@@ -60,6 +87,10 @@ class GameLogic
       end
       $board_number = $playing_numbers.each_slice(3).to_a
       my_board = Board.new($board_number[0], $board_number[1], $board_number[2])
+      check_win = Check_winner.new($board_number[0], $board_number[1], $board_number[2])
+      check_win.vertical_check
+      check_win.diagonal_check
+      check_win.linear_check
       puts my_board.draw_board
     elsif val.is_a? String
       puts 'Entered a string'
