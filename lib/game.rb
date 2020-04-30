@@ -5,7 +5,7 @@ $playing_numbers = (1..9).to_a
 $player_status = 1
 $winner = false
 
-class Player_one
+class PlayerOne
   attr_reader :num_played
   def initialize(num_played)
     @num_played = num_played
@@ -17,7 +17,7 @@ class Player_one
   end
 end
 
-class Player_two < Player_one
+class PlayerTwo < PlayerOne
   def initialize(num_played)
     super
     $player_status = 1
@@ -44,7 +44,7 @@ class Board
   end
 end
 
-class Check_winner < Board
+class CheckWinner < Board
   def vertical_check
     check = nil
     i = 0
@@ -87,13 +87,11 @@ class GameLogic
       end
       $board_number = $playing_numbers.each_slice(3).to_a
       my_board = Board.new($board_number[0], $board_number[1], $board_number[2])
-      check_win = Check_winner.new($board_number[0], $board_number[1], $board_number[2])
+      check_win = CheckWinner.new($board_number[0], $board_number[1], $board_number[2])
       check_win.vertical_check
       check_win.diagonal_check
       check_win.linear_check
-      puts my_board.draw_board
-    elsif val.is_a? String
-      puts 'Entered a string'
+      my_board.draw_board
     end
   end
 end

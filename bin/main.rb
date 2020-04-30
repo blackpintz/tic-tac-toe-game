@@ -24,9 +24,7 @@ def game_func(arr)
         game_func(arr)
       else
         arr << answer.to_i
-        print arr
-        puts ''
-        Player_one.new(answer)
+        PlayerOne.new(answer)
       end
     else
       puts "#{$player_two}, what is your number?"
@@ -39,9 +37,7 @@ def game_func(arr)
         game_func(arr)
       else
         arr << answer.to_i
-        print arr
-        puts ''
-        Player_two.new(answer)
+        PlayerTwo.new(answer)
       end
     end
     logic = GameLogic.new

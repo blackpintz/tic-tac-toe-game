@@ -7,13 +7,17 @@ AllCops:
   DisplayCopNames: true
 
 Layout/LineLength:
-  Max: 120
+  Enabled: false
 Metrics/MethodLength:
-  Max: 40
+  Max: 100
 Metrics/AbcSize:
   Enabled: false
 Metrics/ClassLength:
   Max: 150
+Metrics/CyclomaticComplexity:
+  Enabled: false
+Metrics/PerceivedComplexity:
+  Enabled: false
 Metrics/BlockLength:
   ExcludedMethods: ['describe']
   Max: 30
@@ -32,6 +36,12 @@ Style/DefWithParentheses:
   Enabled: false
 Style/ClassVars:
   Enabled: false
+Style/GlobalVars:
+  Enabled: false
+Style/MultipleComparison: 
+  Enabled: false
+Style/GuardClause:
+  Enabled: false
 Style/FrozenStringLiteralComment:
   EnforcedStyle: never
 
@@ -45,6 +55,12 @@ Layout/MultilineMethodCallIndentation:
 Lint/RaiseException:
   Enabled: false
 Lint/StructNewOverride:
+  Enabled: false
+Lint/UselessAssignment:
+  Enabled: false
+Lint/NestedMethodDefinition:
+  Enabled: false
+Style/IdenticalConditionalBranches:
   Enabled: false
 Style/HashEachMethods:
   Enabled: false
