@@ -7,7 +7,7 @@ $player_status = 1
 $answer = nil
 
 class Player_one
-  attr_accessor :name
+  attr_reader :num_played
   def initialize(num_played)
     @num_played = num_played
     $player_status = 0
@@ -46,35 +46,25 @@ class Board
   end
 end
 
-class Notification
-  def messenger(msg)
-    method(msg).call
-  end
-end
 
 class GameLogic
-  def value_arr(value)
-    $answer = method(value).call
-    print $num_arr
-  end
-
-  def game(val)
-    if $playing_numbers.include?(val) && !$num_arr.include?(val)
+  def game(res)
+    val = res.to_i
+    if $playing_numbers.include?(val)
       if $player_status == 1
         $playing_numbers.map! do |value|
           value == val ? value = 'X' : value
         end
       else
         $playing_numbers.map! do |value|
-        value == val ? value = 0 : value
+          value == val ? value = 0 : value
+        end
       end
-      end
-      board_number = $playing_numbers.each_slice(3).to_a
-      my_board = Board.new(board_number[0], board_number[1], board_number[2])
+      $board_number = $playing_numbers.each_slice(3).to_a
+      my_board = Board.new($board_number[0], $board_number[1], $board_number[2])
       puts my_board.draw_board
-      print $num_arr
-    else
-      puts 'Wrong value'
+      elsif val.is_a? String
+      puts 'Entered a string'
     end
   end
 end

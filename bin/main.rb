@@ -2,78 +2,71 @@
 
 require_relative '../lib/game.rb'
 
-# puts 'Player One Enter your name!!'
 
-# player_one = gets.chomp
-
-# puts 'Player Two Enter your name!!'
-
-# player_two = gets.chomp
-
-# puts "player One is #{player_one} and palyer two is #{player_two} "
-
-# alican = TicTacToe.new(player_one, player_two)
-
-# alican.input
-
-# def out_of_range
-#     puts "Your number is out of range"
-#     puts "Please enter another number?"
-#     answer = gets.chomp
-#     answer
-# end
-
-puts 'Palyer ones name'
+puts 'Name of Player one'
 $player_one = gets.chomp
 
 
-puts 'Palyer ones name'
+puts 'Name of Player two'
 $player_two = gets.chomp
 
 puts "player one is #{$player_one} and player two is #{$player_two}"
 
-def player_oner
-  puts "#{$player_one}, what is your number?"
-  answer = gets.chomp
-  answer.to_i
-end
-
-def player_two
-    puts "#{$player_two}, what is your number?"
-    answer = gets.chomp
-    answer.to_i
-    
-end
 
 def game_func(arr)
-i = arr.length + 1
-while i > 0
-if $player_status == 1
-puts "#{$player_one}, what is your number?"
-answer = gets.chomp.to_i
-Player_one.new(answer)
-else
-puts "#{$player_two}, what is your number?"
-answer = gets.chomp.to_i
-Player_two.new(answer)
+  i = arr.length + 1
+  while i.positive?
+    if $player_status == 1
+      puts "#{$player_one}, what is your number?"
+      answer = gets.chomp
+      if answer.to_i < 1 || answer.to_i > 9
+        puts 'Number is out of range'
+        game_func(arr)
+      elsif arr.include?(answer.to_i)
+        puts 'Number already selected'
+        game_func(arr)
+      else
+        arr << answer.to_i
+        print arr
+        puts ''
+        Player_one.new(answer)
+      end
+    else
+      puts "#{$player_two}, what is your number?"
+      answer = gets.chomp.to_i
+      if answer.to_i < 1 || answer.to_i > 9
+        puts 'Number is out of range'
+        game_func(arr)
+      elsif arr.include?(answer.to_i)
+        puts 'Number already selected'
+        game_func(arr)
+      else
+        arr << answer.to_i
+        print arr
+        puts ''
+        Player_two.new(answer)
+      end
+    end
+    logic = GameLogic.new
+    puts logic.game(answer)
+    i += 1
+    break if i == 10
+  end
+  puts arr.length
+  if arr.length == 9
+    puts 'Looks like its a draw game'
+    puts 'Do you wanna play again,. Press y if yes and n if no'
+    ans = gets.chomp
+    if ans == 'y' || ans == 'yes'
+      arr = []
+      $playing_numbers = (1..9).to_a
+      $player_status = 1
+      $board_number = []
+      game_func(arr)
+    else
+      puts 'Alright Guys. Get out of here'
+    end
+  end
 end
-logic = GameLogic.new
-puts logic.game(answer)
-break if i == 10
-end
-end
 
-puts game_func($num_arr)   
-
-
-# def congratulations
-#     "Congratulations, you win!"
-# end
-
-# logic = GameLogic.new
-# puts logic.value_arr(:player_oner)
-# puts logic.game($answer, :player_two)
-
-# new_msg = Notification.new
-# puts new_msg.messenger(:out_of_range)
-# puts new_msg.messenger(:congratulations)
+puts game_func($num_arr)  
