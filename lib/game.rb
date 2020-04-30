@@ -12,11 +12,10 @@ class Player_one
     @num_played = num_played
     $player_status = 0
   end
-  
+
   def push_arr
     $num_arr.push(@num_played)
   end
-
 end
 
 class Player_two < Player_one
@@ -46,7 +45,6 @@ class Board
   end
 end
 
-
 class GameLogic
   def game(res)
     val = res.to_i
@@ -63,7 +61,7 @@ class GameLogic
       $board_number = $playing_numbers.each_slice(3).to_a
       my_board = Board.new($board_number[0], $board_number[1], $board_number[2])
       puts my_board.draw_board
-      elsif val.is_a? String
+    elsif val.is_a? String
       puts 'Entered a string'
     end
   end

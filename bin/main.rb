@@ -2,16 +2,13 @@
 
 require_relative '../lib/game.rb'
 
-
 puts 'Name of Player one'
 $player_one = gets.chomp
-
 
 puts 'Name of Player two'
 $player_two = gets.chomp
 
 puts "player one is #{$player_one} and player two is #{$player_two}"
-
 
 def game_func(arr)
   i = arr.length + 1
@@ -54,19 +51,26 @@ def game_func(arr)
   end
   puts arr.length
   if arr.length == 9
-    puts 'Looks like its a draw game'
-    puts 'Do you wanna play again,. Press y if yes and n if no'
-    ans = gets.chomp
-    if ans == 'y' || ans == 'yes'
-      arr = []
-      $playing_numbers = (1..9).to_a
-      $player_status = 1
-      $board_number = []
-      game_func(arr)
-    else
-      puts 'Alright Guys. Get out of here'
+    def repeat
+      puts 'Looks like its a dray game'
+      puts 'Do you wanna play again,. Press y if yes and n if no'
+      ans = gets.chomp
+      if ans == 'y' || ans == 'yes'
+        arr = []
+        $playing_numbers = (1..9).to_a
+        $player_status = 1
+        $board_number = []
+        game_func(arr)
+      elsif ans == 'n' || ans == 'no'
+        puts 'Alright Guys. Get out of here'
+        exit
+      else
+        puts 'Please Enter y or n'
+        repeat
+      end
     end
+    repeat
   end
 end
 
-puts game_func($num_arr)  
+puts game_func($num_arr)
