@@ -1,5 +1,6 @@
 require 'rubygems'
 require 'terminal-table/import'
+
 $num_arr = []
 $playing_numbers = (1..9).to_a
 $player_status = 1
