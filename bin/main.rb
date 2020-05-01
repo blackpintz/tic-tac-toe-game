@@ -1,14 +1,14 @@
 #!/usr/bin/env ruby
 
-require_relative '../lib/game.rb'
+require_relative './game.rb'
 
 puts 'Name of Player one'
-$player_one = gets.chomp
+player_one = gets.chomp
 
 puts 'Name of Player two'
-$player_two = gets.chomp
+player_two = gets.chomp
 
-puts "player one is #{$player_one} and player two is #{$player_two}"
+puts "player one is #{player_one} and player two is #{player_two}"
 
 game_arr = (1..9).to_a
 player = Player.new(0)
@@ -16,34 +16,34 @@ token = player.token
 playing_board = Board.new(game_arr)
 board_arr = []
 
-def game_func(arr, game_arr,token, playing_board)
+def game_func(arr, game_arr, token, playing_board, player_one, player_two)
   i = arr.length + 1
   while i.positive?
     if token == 0
-      puts "#{$player_one}, what is your number?"
+      puts "#{player_one}, what is your number?"
       answer = gets.chomp
       if answer.to_i < 1 || answer.to_i > 9
         puts 'Number is out of range'
-        game_func(arr, game_arr,token, playing_board)
+        game_func(arr, game_arr, token, playing_board, player_one, player_two)
       elsif arr.include?(answer.to_i)
         puts 'Number already selected'
-        game_func(arr, game_arr,token, playing_board)
+        game_func(arr, game_arr, token, playing_board, player_one, player_two)
       else
         arr << answer.to_i
         playing_board.change_board(answer, token)
         puts playing_board.draw_board
         puts playing_board.winner
-        token = 1 
+        token = 1
       end
     else
-      puts "#{$player_two}, what is your number?"
+      puts "#{player_two}, what is your number?"
       answer = gets.chomp.to_i
       if answer.to_i < 1 || answer.to_i > 9
         puts 'Number is out of range'
-        game_func(arr, game_arr,token, playing_board)
+        game_func(arr, game_arr, token, playing_board, player_one, player_two)
       elsif arr.include?(answer.to_i)
         puts 'Number already selected'
-        game_func(arr, game_arr,token, playing_board)
+        game_func(arr, game_arr, token, playing_board, player_one, player_two)
       else
         arr << answer.to_i
         playing_board.change_board(answer, token)
@@ -57,34 +57,31 @@ def game_func(arr, game_arr,token, playing_board)
   end
   puts arr.length
   if arr.length == 9 || playing_board.winner
-    def repeat(game_arr, token, playing_board)
+
+    repeat_game = GameLogic.new
+
+    if playing_board.winner
+      puts "#{player_one}, you've won the game" if token == 1
+      puts "#{player_two}, you've won the game" if token == 0
       puts 'Do you wanna play again,. Press y if yes and n if no'
       ans = gets.chomp
-      if ans == 'y' || ans == 'yes'
-        arr = []
-        token = 0
-        game_arr = (1..9).to_a
-        playing_board= Board.new(game_arr)
-        $board_number = []
-        game_func(arr, game_arr,token, playing_board)
-      elsif ans == 'n' || ans == 'no'
-        puts 'Alright Guys. Get out of here'
-        exit
-      else
-        puts 'Please Enter y or n'
-        repeat(game_arr, token,playing_board)
+      while ans != "y" || ans != "n"
+        puts "Enter 'y' or 'n' "
+        ans = gets.chomp
+        break if ans == "y" || ans == "n"
       end
-    end
-    if playing_board.winner
-      puts "#{$player_one}, you've won the game" if token == 1
-      puts "#{$player_two}, you've won the game" if token == 0
-      repeat(game_arr, token,playing_board)
+      
+      repeat_game.repeat(game_arr, token, playing_board, player_one, player_two, :game_func, ans)
+      
     else
       puts 'Looks like its a draw game'
-      repeat(game_arr, token, playing_board)
+      puts 'Do you wanna play again,. Press y if yes and n if no'
+      ans = gets.chomp
+      repeat_game.repeat(game_arr, token, playing_board, player_one, player_two, :game_func, ans)
     end
-    repeat(game_arr, token, playing_board)
+
+    repeat_game.repeat(game_arr, token, playing_board, player_one, player_two, :game_func, ans)
   end
 end
 
-puts game_func(board_arr, game_arr, token, playing_board)
+game_func(board_arr, game_arr, token, playing_board, player_one, player_two)
