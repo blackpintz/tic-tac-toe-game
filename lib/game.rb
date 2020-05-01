@@ -3,25 +3,12 @@ require 'terminal-table/import'
 
 $num_arr = []
 $playing_numbers = (1..9).to_a
-$player_status = 1
 $winner = false
 
-class PlayerOne
-  attr_reader :num_played
-  def initialize(num_played)
-    @num_played = num_played
-    $player_status = 0
-  end
-
-  def push_arr
-    $num_arr.push(@num_played)
-  end
-end
-
-class PlayerTwo < PlayerOne
-  def initialize(num_played)
-    super
-    $player_status = 1
+class Player
+  attr_accessor :token
+  def initialize(token)
+    @token = token
   end
 end
 
@@ -43,9 +30,7 @@ class Board
     end
     board
   end
-end
-
-class CheckWinner < Board
+  
   def vertical_check
     check = nil
     i = 0
@@ -54,9 +39,9 @@ class CheckWinner < Board
       i += 1
       break if check == true
     end
-    check == true ? $winner = true : nil
+    check == true ? true : false
   end
-
+  
   def diagonal_check
     i = 0
     while i < @arry_one.length
@@ -64,34 +49,45 @@ class CheckWinner < Board
       i += 1
       break if check == true
     end
-    check == true ? $winner = true : nil
+    check == true ?  true : false
   end
-
+  
   def linear_check
     check = (@arry_one.all?(0) || @arry_one.all?('X')) || (@arry_two.all?(0) || @arry_two.all?('X')) || (@arry_three.all?(0) || @arry_three.all?('X'))
-    check == true ? $winner = true : nil
+    check == true ? true : false
   end
+  
+  def winner
+    if linear_check || diagonal_check || vertical_check
+      true
+    else
+      false
+    end
+  end
+  
 end
 
+
 class GameLogic
-  def game(res)
+  def initialize(arr)
+    @arr = arr
+  end
+
+  def game(res, token)
     val = res.to_i
-    if $playing_numbers.include?(val)
-      if $player_status == 1
-        $playing_numbers.map! do |value|
+    if @arr.include?(val)
+      if token == 0
+        @arr.map! do |value|
           value == val ? value = 'X' : value
         end
       else
-        $playing_numbers.map! do |value|
+        @arr.map! do |value|
           value == val ? value = 0 : value
         end
       end
-      $board_number = $playing_numbers.each_slice(3).to_a
+      $board_number = @arr.each_slice(3).to_a
       my_board = Board.new($board_number[0], $board_number[1], $board_number[2])
-      check_win = CheckWinner.new($board_number[0], $board_number[1], $board_number[2])
-      check_win.vertical_check
-      check_win.diagonal_check
-      check_win.linear_check
+      puts my_board.winner
       my_board.draw_board
     end
   end
