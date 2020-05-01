@@ -19,7 +19,7 @@ board_arr = []
 def game_func(arr, game_arr, token, playing_board, player_one, player_two)
   i = arr.length + 1
   while i.positive?
-    if token == 0
+    if token.zero?
       puts "#{player_one}, what is your number?"
       answer = gets.chomp
       if answer.to_i < 1 || answer.to_i > 9
@@ -60,25 +60,21 @@ def game_func(arr, game_arr, token, playing_board, player_one, player_two)
 
     if playing_board.winner
       puts "#{player_one}, you've won the game" if token == 1
-      puts "#{player_two}, you've won the game" if token == 0
+      puts "#{player_two}, you've won the game" if token.zero?
       puts 'Do you wanna play again? Press y if yes and n if no'
       ans = gets.chomp
-      while ans != "y" && ans != "n"
+      while ans != 'y' && ans != 'n'
         puts "Enter 'y' or 'n' "
         ans = gets.chomp
-        break if ans == "y" || ans == "n"
+        break if ans == 'y' || ans == 'n'
       end
-      if ans == "n" || ans == "no"
-        puts 'Bye for now.'
-      end
+      puts 'Bye for now.' if ans == 'n' || ans == 'no'
       repeat_game.repeat(game_arr, token, playing_board, player_one, player_two, :game_func, ans)
     else
       puts 'Looks like its a draw game'
       puts 'Do you wanna play again? Press y if yes and n if no'
       ans = gets.chomp
-      if ans == "n" || ans == "no"
-        puts 'Bye for now.'
-      end
+      puts 'Bye for now.' if ans == 'n' || ans == 'no'
       repeat_game.repeat(game_arr, token, playing_board, player_one, player_two, :game_func, ans)
     end
 

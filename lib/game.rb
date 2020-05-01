@@ -18,7 +18,7 @@ class Board
   def change_board(res, token)
     val = res.to_i
     if @arr.include?(val)
-      if token == 0
+      if token.zero?
         @arr.map! do |value|
           value == val ? value = 'X' : value
         end
@@ -81,8 +81,7 @@ class Board
 end
 
 class GameLogic
-  def repeat(game_arr, token, playing_board, player_one, player_two, _game_func,ans)
-    
+  def repeat(game_arr, token, playing_board, player_one, player_two, _game_func, ans)
     if ans == 'y' || ans == 'yes'
       arr = []
       token = 0
