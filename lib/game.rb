@@ -90,7 +90,6 @@ class GameLogic
       playing_board = Board.new(game_arr)
       method(game_func(arr, game_arr, token, playing_board, player_one, player_two)).call
     elsif ans == 'n' || ans == 'no'
-      'Alright Guys. Get out of here'
       exit
     end
 

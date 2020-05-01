@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-require_relative './game.rb'
+require_relative '../lib/game.rb'
 
 puts 'Name of Player one'
 player_one = gets.chomp
@@ -32,7 +32,6 @@ def game_func(arr, game_arr, token, playing_board, player_one, player_two)
         arr << answer.to_i
         playing_board.change_board(answer, token)
         puts playing_board.draw_board
-        puts playing_board.winner
         token = 1
       end
     else
@@ -48,7 +47,6 @@ def game_func(arr, game_arr, token, playing_board, player_one, player_two)
         arr << answer.to_i
         playing_board.change_board(answer, token)
         puts playing_board.draw_board
-        puts playing_board.winner
         token = 0
       end
     end
@@ -63,20 +61,24 @@ def game_func(arr, game_arr, token, playing_board, player_one, player_two)
     if playing_board.winner
       puts "#{player_one}, you've won the game" if token == 1
       puts "#{player_two}, you've won the game" if token == 0
-      puts 'Do you wanna play again,. Press y if yes and n if no'
+      puts 'Do you wanna play again? Press y if yes and n if no'
       ans = gets.chomp
-      while ans != "y" || ans != "n"
+      while ans != "y" && ans != "n"
         puts "Enter 'y' or 'n' "
         ans = gets.chomp
         break if ans == "y" || ans == "n"
       end
-      
+      if ans == "n" || ans == "no"
+        puts 'Bye for now.'
+      end
       repeat_game.repeat(game_arr, token, playing_board, player_one, player_two, :game_func, ans)
-      
     else
       puts 'Looks like its a draw game'
-      puts 'Do you wanna play again,. Press y if yes and n if no'
+      puts 'Do you wanna play again? Press y if yes and n if no'
       ans = gets.chomp
+      if ans == "n" || ans == "no"
+        puts 'Bye for now.'
+      end
       repeat_game.repeat(game_arr, token, playing_board, player_one, player_two, :game_func, ans)
     end
 
