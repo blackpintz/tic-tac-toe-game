@@ -2,14 +2,14 @@ require 'rubygems'
 require 'terminal-table/import'
 
 class Player
-  attr_accessor :token
+  attr_reader :token
   def initialize(token)
     @token = token
   end
 end
 
 class Board
-  attr_accessor :arr
+  attr_reader :arr
   @@board_number = nil
   def initialize(arr)
     @arr = arr

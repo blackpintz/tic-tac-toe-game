@@ -74,6 +74,11 @@ def game_func(arr, game_arr, token, playing_board, player_one, player_two)
       puts 'Looks like its a draw game'
       puts 'Do you wanna play again? Press y if yes and n if no'
       ans = gets.chomp
+      while ans != 'y' && ans != 'n'
+        puts "Enter 'y' or 'n' "
+        ans = gets.chomp
+        break if ans == 'y' || ans == 'n'
+      end
       puts 'Bye for now.' if ans == 'n' || ans == 'no'
       repeat_game.repeat(game_arr, token, playing_board, player_one, player_two, :game_func, ans)
     end
