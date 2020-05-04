@@ -28,10 +28,11 @@ When all the nine (9) squares are marked the game is over. If no player has thre
 ### Restart game
 You can only restart a game after a win or when the game ends in a tie. When the game is over, you will get options to either restart or end the game between the current players.
 
-##Built With
+## Built With
 Ruby
 
-##Live Demo
+## Live Demo
+
 [Live Demo Link](https://repl.it/@blackpintz/WatchfulInvolvedNaturallanguage)
 
 
