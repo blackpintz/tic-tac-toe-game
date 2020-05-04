@@ -6,22 +6,22 @@
 ### The player who succeeds in placing three of their marks in a horizontal, vertical, or diagonal row, as shown in the images below, is the winner.
 
 <div>
-<img src="images/tic-win.png" width="400"> 
+<img src="images/tic-win.png" width="250"><br>
 <figcaption> diagonal win </figcaption>
 </div>
 <div>
-<img src="images/tic-win2.png" width="400"> 
+<img src="images/tic-win2.png" width="250"><br>
 <figcaption> horizontal win</figcaption>
 </div>
 <div>
-<img src="images/tic-win3.png" width="400"> 
+<img src="images/tic-win3.png" width="250"> <br>
 <figcaption> vertical win </figcaption>
 </div>
 
 When all the nine (9) squares are marked the game is over. If no player has three marks in a row, the game ends in a tie
 
 <div>
-<img src="images/tic-win4.png" width="400"> 
+<img src="images/tic-win4.png" width="250"> 
 <figcaption> draw game </figcaption>
 </div>
 
