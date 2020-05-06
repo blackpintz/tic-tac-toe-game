@@ -79,4 +79,12 @@ describe 'Game' do
       expect(board.winner).to be true
     end
   end
+  describe '#repeat' do
+    it 'restarts the game' do
+      expect(game.repeat(1, 2, 3, 7, 6, 'yes')).to eql(true)
+    end
+    it 'ends the game' do
+      expect(game.repeat(1, 2, 3, 4, 5, 'no')).to eql(false)
+    end
+  end
 end
