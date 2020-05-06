@@ -41,7 +41,7 @@ describe 'Game' do
       expect(board.diagonal_check).not_to be true
     end
   end
-  
+
   describe '#linear_check' do
     it 'checks linear wins' do
       @@arry_one = %w[X X X]
