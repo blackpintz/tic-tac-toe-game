@@ -69,7 +69,15 @@ def game_func(arr, game_arr, token, playing_board, player_one, player_two)
         break if ans == 'y' || ans == 'n'
       end
       puts 'Bye for now.' if ans == 'n' || ans == 'no'
-      repeat_game.repeat(game_arr, token, playing_board, player_one, player_two, :game_func, ans)
+      returned_result = repeat_game.repeat(game_arr, token, playing_board, player_one, player_two, ans)
+      puts returned_result
+      if returned_result
+        arr = []
+        token = 0
+        game_arr = (1..9).to_a
+        playing_board = Board.new(game_arr)
+        game_func(arr, game_arr, token, playing_board, player_one, player_two)
+      end
     else
       puts 'Looks like its a draw game'
       puts 'Do you wanna play again? Press y if yes and n if no'
@@ -79,13 +87,15 @@ def game_func(arr, game_arr, token, playing_board, player_one, player_two)
         ans = gets.chomp
         break if ans == 'y' || ans == 'n'
       end
-      puts 'Bye for now.' if ans == 'n' || ans == 'no'
-      repeat_game.repeat(game_arr, token, playing_board, player_one, player_two, :game_func, ans)
+      if ans == 'n' || ans == 'no'
+        puts 'Bye for now.'
+        exit
+      end
+      repeat_game.repeat(game_arr, token, playing_board, player_one, player_two, ans)
     end
 
-    repeat_game.repeat(game_arr, token, playing_board, player_one, player_two, :game_func, ans)
+    repeat_game.repeat(game_arr, token, playing_board, player_one, player_two, ans)
   end
 end
 
 game_func(board_arr, game_arr, token, playing_board, player_one, player_two)
-
