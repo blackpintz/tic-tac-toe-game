@@ -41,4 +41,42 @@ describe 'Game' do
       expect(board.diagonal_check).not_to be true
     end
   end
+  
+  describe '#linear_check' do
+    it 'checks linear wins' do
+      @@arry_one = %w[X X X]
+      @@arry_two = [4, '0', 6]
+      @@arry_three = [7, 8, '0']
+      expect(board.linear_check).to be true
+    end
+    it 'checks when there is no linear wins' do
+      @@arry_one = ['X', 2, 3]
+      @@arry_two = [4, 'X', 6]
+      @@arry_three = [7, 'X', 9]
+      expect(board.linear_check).not_to be true
+    end
+  end
+  describe '#winner' do
+    it 'checks if there is a winner with diagonal alignment scenario' do
+      @@arry_one = ['X', 2, 3]
+      @@arry_two = [4, 'X', 6]
+      @@arry_three = [7, 8, 'X']
+      expect(board.diagonal_check).to be true
+      expect(board.winner).to be true
+    end
+    it 'checks if there is a winner with vertical alignment scenario' do
+      @@arry_one = ['X', 'X', 3]
+      @@arry_two = [4, 'X', 6]
+      @@arry_three = [7, 'X', '0']
+      expect(board.vertical_check).to be true
+      expect(board.winner).to be true
+    end
+    it 'checks if there is a winner with linear alignment scenario' do
+      @@arry_one = %w[X X X]
+      @@arry_two = [4, 'X', 6]
+      @@arry_three = [7, '0', '0']
+      expect(board.linear_check).to be true
+      expect(board.winner).to be true
+    end
+  end
 end
