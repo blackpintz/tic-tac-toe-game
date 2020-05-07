@@ -41,7 +41,7 @@ describe 'Game' do
       expect(board.diagonal_check).not_to be true
     end
   end
-  
+
   describe '#linear_check' do
     it 'checks linear wins' do
       @@arry_one = %w[X X X]
@@ -77,6 +77,14 @@ describe 'Game' do
       @@arry_three = [7, '0', '0']
       expect(board.linear_check).to be true
       expect(board.winner).to be true
+    end
+  end
+  describe '#repeat' do
+    it 'restarts the game' do
+      expect(game.repeat(1, 2, 3, 7, 6, 'yes')).to eql(true)
+    end
+    it 'ends the game' do
+      expect(game.repeat(1, 2, 3, 4, 5, 'no')).to eql(false)
     end
   end
 end
